@@ -1,0 +1,3 @@
+build:
+  command: npx opennextjs-cloudflare build
+  output_dir: .open-next/assets
