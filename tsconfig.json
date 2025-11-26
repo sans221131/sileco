@@ -12,6 +12,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
+		"allowImportingTsExtensions": true,
 		"incremental": true,
 		"plugins": [
 			{
@@ -23,7 +24,8 @@
 		},
 		"types": [
 			"./cloudflare-env.d.ts",
-			"node"
+			"node",
+			"three"
 		]
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
