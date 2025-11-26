@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import gsap from "gsap";
 
@@ -110,12 +111,11 @@ export default function WorldCanvas({ stage }: WorldCanvasProps) {
     MODEL_CONFIGS.forEach((config, index) => {
       loader.load(
         config.url,
-        (gltf: any) => {
+        (gltf: GLTF) => {
           const model = gltf.scene;
           model.position.set(...config.position);
           // Smaller scale so all four models fit in center view
           model.scale.setScalar(config.scale);
-          model.rotation.y = Math.random() * Math.PI * 2;
 
           // Override all materials to white with dark details
           model.traverse((child: THREE.Object3D) => {
@@ -179,7 +179,7 @@ export default function WorldCanvas({ stage }: WorldCanvasProps) {
           // (rotation animation removed — models stay oriented toward camera)
         },
         undefined,
-        (error: any) => {
+        (error: unknown) => {
           console.error("Error loading GLB:", config.url, error);
         }
       );
@@ -229,7 +229,7 @@ export default function WorldCanvas({ stage }: WorldCanvasProps) {
       if (dracoLoader) {
         try {
           dracoLoader.dispose();
-        } catch (e) {
+        } catch {
           // ignore disposal errors
         }
       }
